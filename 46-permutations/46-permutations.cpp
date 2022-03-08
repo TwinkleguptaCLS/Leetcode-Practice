@@ -1,6 +1,24 @@
 class Solution {
 public:
     vector<vector<int>>ans;
+    void rightrotate(vector<int>&nums,int i,int j)
+    {
+        int ch = nums[j];
+        for(int k=j;k>i;k--)
+        {
+            nums[k] = nums[k-1];
+        }
+        nums[i] = ch;
+    }
+     void leftrotate(vector<int>&nums,int i,int j)
+    {
+        int ch = nums[i];
+        for(int k=i;k<j;k++)
+        {
+            nums[k] = nums[k+1];
+        }
+        nums[j] = ch;
+    }
     void allPermute(int i,int n,vector<int>&nums)
     {
         if(i==n-1)
@@ -10,9 +28,9 @@ public:
         }
         for(int j=i;j<n;j++)
         {
-            swap(nums[i],nums[j]);
+            rightrotate(nums,i,j);
             allPermute(i+1,n,nums);
-            swap(nums[i],nums[j]);
+            leftrotate(nums,i,j);
         }
     }
     vector<vector<int>> permute(vector<int>& nums) {
