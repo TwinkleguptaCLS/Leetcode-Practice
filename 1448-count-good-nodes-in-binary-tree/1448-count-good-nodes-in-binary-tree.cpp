@@ -12,7 +12,7 @@
 class Solution {
 public:
     int cnt=1;
-    void leftgoodNodes(int node,TreeNode* root) // 3 , 1->root
+    void goodNodeshelper(int node,TreeNode* root) // 3 , 1->root
     {
         if(!root)
         {
@@ -23,33 +23,19 @@ public:
             cnt++;
         }
         node = max(node,root->val);
-        leftgoodNodes(node,root->left);  
-        leftgoodNodes(node,root->right);
+        goodNodeshelper(node,root->left);  
+        goodNodeshelper(node,root->right);
         
     }
-    void rightgoodNodes(int node,TreeNode* root)
-    {
-        if(!root)
-        {
-            return;
-        }
-        if(root->val>=node)
-        {
-            cnt++;
-        }
-        node = max(node,root->val);
-        leftgoodNodes(node,root->left);
-        leftgoodNodes(node,root->right);
-        
-    }
+   
     int goodNodes(TreeNode* root) {
         if(root->left)
         {
-            leftgoodNodes(root->val,root->left);
+            goodNodeshelper(root->val,root->left); //O(h)
         }
         if(root->right)
         {
-            rightgoodNodes(root->val,root->right);
+            goodNodeshelper(root->val,root->right); //O(h)
         }
         
         return cnt;
