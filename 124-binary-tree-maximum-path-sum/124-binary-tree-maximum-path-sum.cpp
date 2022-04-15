@@ -14,11 +14,11 @@ public:
     int helper(TreeNode* root, int &ans)
     {
         if(!root) return 0;
-        int s1 = helper(root->left,ans);
-        int s2 = helper(root->right,ans);
+        int s1 = max(0,helper(root->left,ans));
+        int s2 = max(0,helper(root->right,ans));
         
-        ans = max(ans,root->val+max(s1,0)+max(s2,0));
-        return root->val+ max({s1,s2,0});
+        ans = max(ans,root->val+s1+s2);
+        return root->val+ max(s1,s2);
     }
     int maxPathSum(TreeNode* root) {
         int ans = INT_MIN;
