@@ -11,22 +11,26 @@
  */
 class Solution {
 public:
-    void lefttree(TreeNode* root,vector<int>&ans)
+    int cnt =0;
+    void lefttree(TreeNode* root,int &ans,int k)
     {
         if(!root) return;
         
-        lefttree(root->left,ans);
-        ans.push_back(root->val);
-        lefttree(root->right,ans);
+        lefttree(root->left,ans,k);
+        cnt++;
+        if(cnt==k)
+        {
+            ans = root->val;
+        }
+        lefttree(root->right,ans,k);
         
     }
     int kthSmallest(TreeNode* root, int k) {
         if(!root) return -1;
-        vector<int>ans;
+        int ans=0;
        
-        lefttree(root,ans);
-         for(int i:ans)
-            cout<<i;
-        return ans[k-1];
+        lefttree(root,ans,k);
+         
+        return ans;
     }
 };
